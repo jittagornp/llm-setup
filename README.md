@@ -2,6 +2,6 @@
 
 ### Install APISIX
 ```
-$ cd apisix
-$ docker compose up -d
+cd apisix
+docker compose up -d
 ```
