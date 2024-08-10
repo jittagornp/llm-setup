@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  etcd:
+    image: bitnami/etcd:3.5.15
+    hostname: etcd
+    container_name: etcd
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ENABLE_V2=true
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+    volumes:
+      - etcd_data:/bitnami/etcd
+    restart: always
+    networks:
+    - ai
+
+  apisix:
+    image: apache/apisix:latest
+    hostname: apisix
+    container_name: apisix
+    depends_on:
+      - etcd
+    ports:
+      - "80:9080"   # for API requests
+      - "443:9443"   # for HTTPS API requests
+      - "9180:9180"   # for Admin API requests
+    volumes:
+      - ./apisix/config.yaml:/usr/local/apisix/conf/config.yaml
+    restart: always
+    networks:
+    - ai    
+
+  apisix-dashboard:
+    image: apache/apisix-dashboard:latest
+    hostname: apisix-dashboard
+    container_name: apisix-dashboard
+    depends_on:
+      - apisix
+    ports:
+      - "7000:9000"
+    volumes:
+     - ./apisix-dashboard/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml  
+    environment:
+      - APISIX_API_BASE_URL=http://apisix:9180/apisix/admin
+    restart: always
+    networks:
+    - ai    
+
+volumes:
+  etcd_data:
+
+networks:
+  ai:
+    name: ai
