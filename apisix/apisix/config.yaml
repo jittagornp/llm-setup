@@ -11,3 +11,15 @@ deployment:
       - "http://etcd:2379"
     prefix: "/apisix"
     timeout: 30
+
+plugin_attr:
+  prometheus:
+    export_uri: /apisix/prometheus/metrics
+    export_addr:
+      ip: 0.0.0.0
+      port: 9091
+    metrics:
+      http_status:
+        extra_labels:
+          - upstream_addr: $upstream_addr
+          - upstream_status: $upstream_status    

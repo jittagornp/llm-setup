@@ -28,6 +28,7 @@ services:
       - "80:9080"   # for API requests
       - "443:9443"   # for HTTPS API requests
       - "9180:9180"   # for Admin API requests
+      - "9091:9091"   # for Prometheus requests
     volumes:
       - ./apisix/config.yaml:/usr/local/apisix/conf/config.yaml
     restart: always
