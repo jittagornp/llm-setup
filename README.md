@@ -3,6 +3,7 @@
 ### Article
 
 - [ทำ Authentication ให้ LLM API ด้วย APISIX](https://medium.com/lotuss-it/%E0%B8%97%E0%B8%B3-authentication-%E0%B9%83%E0%B8%AB%E0%B9%89-llm-api-%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2-apisix-1cda2a6aaba8)
+- [วิธีการ Setup Https ให้กับ APISIX](https://medium.com/lotuss-it/%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3-setup-https-%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%81%E0%B8%B1%E0%B8%9A-apisix-8a654f32c1a3)
 
 
 ### Install APISIX
