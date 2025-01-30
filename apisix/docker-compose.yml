@@ -51,8 +51,37 @@ services:
     networks:
     - ai    
 
+  prometheus:
+    image: prom/prometheus:v3.0.0
+    container_name: prometheus
+    ports:
+      - "19090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - ai
+    user: root
+
+  grafana:
+    image: grafana/grafana-oss:11.3.1
+    container_name: grafana
+    ports:
+      - "13000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+#      - GF_SERVER_ROOT_URL=https://my-domain-name.com/grafana
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+    networks:
+      - ai
+    user: root
+
 volumes:
   etcd_data:
+  prometheus_data:
+  grafana_data:
 
 networks:
   ai:
